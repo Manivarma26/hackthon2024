@@ -39,7 +39,8 @@ Infrastructure as Code
 Hardware: 
 IoT devices - ESP 32
 
-Programming Languages: Python
+Programming Languages: 
+Python
 
 System Architecture Diagram
 
