@@ -44,34 +44,33 @@ Python
 
 # System Architecture and its Diagram
 
-1. ESP32 Data Collection:
+# 1. ESP32 Data Collection:
 
-The ESP32 connects to Wi-Fi and collects data from various sensors (e.g., DHT22, MQ-135).
-The collected data is formatted into JSON and sent to AWS IoT Core via MQTT.
+  The ESP32 connects to Wi-Fi and collects data from various sensors (e.g., DHT22, MQ-135) and the collected data is formatted into JSON and sent to AWS IoT Core via MQTT.
 
-2. AWS IoT Core:
+# 2. AWS IoT Core:
 
-Acts as the entry point for the ESP32, securely receiving data from the devices and triggers AWS Lambda functions to process incoming data.
+  Acts as the entry point for the ESP32, securely receiving data from the devices and triggers AWS Lambda functions to process incoming data.
 
-3. AWS Lambda:
-Processes the incoming data and formats it for storage and stores the processed data in an S3 bucket.
+# 3. AWS Lambda:
+  Processes the incoming data and formats it for storage and stores the processed data in an S3 bucket.
 
-4. AWS S3:
+# 4. AWS S3:
 
-Serves as the data lake, storing all incoming sensor data in a structured format (e.g., CSV, JSON). Enables easy access for downstream analytics.
+  Serves as the data lake, storing all incoming sensor data in a structured format (e.g., CSV, JSON). Enables easy access for downstream analytics.
 
-5. AWS Athena:
+# 5. AWS Athena:
 
-Queries the data stored in S3, allowing  to run SQL queries against the data without needing a database and configured to create tables based on the data structure in S3.
+  Queries the data stored in S3, allowing  to run SQL queries against the data without needing a database and configured to create tables based on the data structure in S3.
 
-6.Redash Dashboards:
+# 6.Redash Dashboards:
 
-Connects to AWS Athena to visualize the queried data and Dashboards display real-time data insights, trends, and alerts for lab conditions.
+  Connects to AWS Athena to visualize the queried data and Dashboards display real-time data insights, trends, and alerts for lab conditions.
 
-7. Slack
+# 7. Slack
 
-Based on the threasholds defined for each dashboard, alert will be notified via slack channel.
+  Based on the threasholds defined for each dashboard, alert will be notified via slack channel.
    
-Infrastructure Architecture Diagram
+# Infrastructure Architecture Diagram
 
 
