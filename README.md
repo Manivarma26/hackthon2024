@@ -1,5 +1,5 @@
 # hackthon2024
-Lab Monitoring System using AWS IoT
+# Lab Monitoring System using AWS IoT
 
 Objective:
 
