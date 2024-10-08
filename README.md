@@ -1,4 +1,4 @@
-# Lab Monitoring System using AWS IoT
+# Lab Monitoring System using IoT Device
 
 # Objective:
 
