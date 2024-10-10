@@ -43,6 +43,7 @@ Programming Languages:
 Python
 
 # System Architecture and its Diagram
+
 ![image](https://github.com/user-attachments/assets/d6fc2c6b-a178-4ac9-b87f-9684bf6ec8b2)
 
 
