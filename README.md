@@ -44,6 +44,9 @@ Python
 
 # System Architecture and its Diagram
 
+![image](https://github.com/user-attachments/assets/cb7b09a7-8e3c-40a3-a07a-4c1e95781d2e)
+
+
 # ESP32 Data Collection:
 
   The ESP32 connects to Wi-Fi and collects data from various sensors (e.g., DHT22, MQ-135) and the collected data is formatted into JSON and sent to AWS IoT Core via MQTT.
