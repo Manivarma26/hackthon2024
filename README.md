@@ -14,6 +14,10 @@
    - Temperature and Humidity Sensor
    - Air Quality Sensor
    - Light Sensor
+   - Fire sensor
+   - Gas Sensor
+   - Voltage Drop
+     
 <img width="1198" alt="image" src="https://github.com/user-attachments/assets/757c45cf-55ca-42c8-a566-4f67c5644d65">
    
 
