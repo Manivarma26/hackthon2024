@@ -41,6 +41,7 @@ Infrastructure as Code
 * Ardunio
 
 Hardware: 
+
 IoT devices - ESP 32
 Temperature & Humidity Sensor - DHT11
 Gas Sensor - MQ-2
