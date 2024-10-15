@@ -1,25 +1,11 @@
-variable "thing_name" {
-  description = "The name of the IoT Thing"
+variable "existing_certificate_arn" {
+  description = "The ARN of an existing IoT Certificate"
   type        = string
+  default     = ""
 }
 
-variable "policy_name" {
-  description = "The name of the IoT Policy"
-  type        = string
-}
-
-variable "policy_document" {
-  description = "The JSON policy document"
-  type        = string
-}
-
-variable "create_certificate" {
-  description = "Whether to create a certificate"
+variable "attach_existing_certificate" {
+  description = "Whether to use an existing certificate"
   type        = bool
-  default     = true
-}
-
-variable "certificate_csr" {
-  description = "The certificate signing request (CSR)"
-  type        = string
+  default     = false
 }
