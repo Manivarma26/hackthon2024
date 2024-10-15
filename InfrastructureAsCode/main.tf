@@ -28,10 +28,10 @@ module "s3" {
 }
 
 module "iot" {
-  source          = "./modules/iot"
-  thing_name      = "MyIoTThing"
-  policy_name     = "MyIoTPolicy"
-  policy_document = jsonencode({
+  source                       = "./modules/iot"
+  thing_name                   = "MyIoTThing"
+  policy_name                  = "MyIoTPolicy"
+  policy_document              = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -46,17 +46,6 @@ module "iot" {
       }
     ]
   })
-  create_certificate = true
-  certificate_csr    = "YOUR_CERTIFICATE_CSR"
+  existing_certificate_arn     = "arn:aws:iot:region:account-id:cert/your-certificate-id"  # Replace with your existing certificate ARN
+  attach_existing_certificate   = true  # Set to true to use the existing certificate
 }
-
-/*
-module "iot" {
-  source = "./modules/iot"
-}
-
-module "lambda" {
-  source = "./modules/lambda"
-  s3_bucket = module.s3.bucket_name
-}
-*/
