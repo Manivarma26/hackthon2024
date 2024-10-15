@@ -13,10 +13,12 @@ provider "aws" {
   region = "us-west-2" 
 }
 
-module "s3" {
-  source = "./modules/s3"
+module "s3_bucket" {
+  source       = "./modules/s3_bucket"
+  bucket_name  = "my-hackthon-bucket-${var.environment}"  # Ensure the bucket name is globally unique
+  environment  = var.environment
 }
-
+/*
 module "iot" {
   source = "./modules/iot"
 }
@@ -25,4 +27,4 @@ module "lambda" {
   source = "./modules/lambda"
   s3_bucket = module.s3.bucket_name
 }
-
+*/
