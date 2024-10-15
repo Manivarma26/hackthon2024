@@ -84,3 +84,28 @@ resource "aws_iot_topic_rule" "iot" {
     function_arn = aws_lambda_function.datadog_logger.arn
   }
 }
+
+resource "aws_iam_policy" "iot_cloudwatch_policy" {
+  name        = "iot_cloudwatch_policy"
+  description = "Policy to allow IoT to write to CloudWatch Logs"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_iot_cloudwatch_policy" {
+  role       = aws_iam_role.iot_cloudwatch_role.name
+  policy_arn = aws_iam_policy.iot_cloudwatch_policy.arn
+}
