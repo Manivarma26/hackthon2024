@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "s3_bucket" {
-  source       = "./modules/s3_bucket"
+  source       = "./modules/s3"
   bucket_name  = "my-hackthon-bucket-${var.environment}"  # Ensure the bucket name is globally unique
   environment  = var.environment
 }
