@@ -13,3 +13,9 @@ variable "aws_region" {
   type        = string
   default     = "us-east-1"
 }
+
+variable "datadog_api_key" {
+  description = "Datadog API key for logging"
+  type        = string
+  sensitive   = true
+}
