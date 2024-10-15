@@ -23,17 +23,64 @@ resource "aws_iot_policy_attachment" "iot" {
   target      = var.existing_certificate_arn
 }
 
+resource "aws_cloudwatch_log_group" "iot_log_group" {
+  name              = "iot-log-group"  # Change to your desired log group name
+  retention_in_days = 7  # Optional: Set retention period
+}
+
+resource "aws_iam_role" "lambda_execution_role" {
+  name = "lambda_execution_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        },
+        Effect = "Allow",
+        Sid = ""
+      }
+    ]
+  })
+}
+
+resource "aws_lambda_function" "datadog_logger" {
+  function_name = "datadog_logger"
+
+  handler = "lambda_function.lambda_handler"
+  runtime = "python3.8"  # or your preferred runtime
+
+  role = aws_iam_role.lambda_execution_role.arn
+
+  source_code_hash = filebase64sha256("lambda/lambda_function.zip")  # Adjust path to your zipped function
+
+  environment = {
+    DD_API_KEY = var.datadog_api_key
+  }
+}
+
 resource "aws_iot_topic_rule" "iot" {
   name        = "${var.thing_name}-to-s3"
-  description = "Send IoT data to S3 bucket"
+  description = "Send IoT data to S3 bucket and CloudWatch"
 
-  sql = "SELECT * FROM '${var.topic_name}'"  # Adjust your SQL statement based on your topic
+  sql = "SELECT * FROM '${var.topic_name}'"
 
   rule_disabled = false
 
   aws_s3 {
     bucket_name = var.s3_bucket_name
-    key         = "${var.thing_name}/${timestamp()}.json"  # Adjust the key as needed
-    role_arn = aws_iam_role.iot_s3_role.arn
+    key         = "${var.thing_name}/${timestamp()}.json"
+    role_arn    = aws_iam_role.iot_s3_role.arn
+  }
+
+  cloudwatch_logs {
+    log_group_name = aws_cloudwatch_log_group.iot_log_group.name  # Reference the log group created above
+    role_arn       = aws_iam_role.iot_cloudwatch_role.arn
+  }
+
+  lambda {
+    function_arn = aws_lambda_function.datadog_logger.arn
   }
 }
