@@ -1,7 +1,14 @@
 resource "aws_s3_bucket" "this" {
-  bucket = "hackathon2024IOT"
+  bucket = var.bucket_name
+  acl    = "private"
+  
+  versioning {
+    enabled = true
+  }
+
+  tags = {
+    Name        = var.bucket_name
+    Environment = var.environment
+  }
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.this.bucket
-}
