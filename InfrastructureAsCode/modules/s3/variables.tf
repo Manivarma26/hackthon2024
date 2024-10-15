@@ -1,9 +1,4 @@
-variable "bucket_name" {
-  description = "hackthon2024iot"
-  type        = string
+variable "name" {
 }
-
 variable "environment" {
-  description = "hackthon"
-  type        = string
 }
