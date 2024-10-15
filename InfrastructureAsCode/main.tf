@@ -27,6 +27,29 @@ module "s3" {
   }
 }
 
+module "iot" {
+  source          = "./modules/iot"
+  thing_name      = "MyIoTThing"
+  policy_name     = "MyIoTPolicy"
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "iot:Connect",
+          "iot:Publish",
+          "iot:Subscribe",
+          "iot:Receive"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+  create_certificate = true
+  certificate_csr    = "YOUR_CERTIFICATE_CSR"
+}
+
 /*
 module "iot" {
   source = "./modules/iot"
