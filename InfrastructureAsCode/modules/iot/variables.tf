@@ -14,3 +14,8 @@ variable "s3_bucket_name" {
   description = "The name of the existing S3 bucket where IoT data will be sent"
   type        = string
 }
+
+variable "topic_name" {
+  description = "The IoT topic to listen to"
+  type        = string
+}
