@@ -20,8 +20,8 @@ module "s3" {
   acl         = "private"
   versioning  = true
   tags        = {
-    Environment = "Production"
-    Name        = "MyProductionBucket"
+    Environment = "hackthon"
+    Name        = "hackthon"
   }
 }
 
