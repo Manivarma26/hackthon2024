@@ -48,4 +48,5 @@ module "iot" {
   })
   existing_certificate_arn     = "arn:aws:iot:region:account-id:cert/your-certificate-id"  # Replace with your existing certificate ARN
   attach_existing_certificate   = true  # Set to true to use the existing certificate
+  s3_bucket_name               = module.s3.bucket_name
 }
