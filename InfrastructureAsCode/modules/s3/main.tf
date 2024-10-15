@@ -1,4 +1,20 @@
-resource "aws_s3_bucket" "s3-bucket" {
-  bucket = "${var.environment}-${var.name}"
+resource "aws_s3_bucket" "hackthon" {
+  bucket = var.bucket_name
+  acl    = var.acl
+
+  versioning {
+    enabled = var.versioning
+  }
+
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_public_access_block" "hackthon" {
+  bucket = aws_s3_bucket.hackthon.id
+
+  block_public_acls       = true
+  ignore_public_acls      = true
+  block_public_policy     = true
+  restrict_public_buckets = true
 }
 
