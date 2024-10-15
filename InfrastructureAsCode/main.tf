@@ -13,11 +13,18 @@ provider "aws" {
   region = "us-west-2" 
 }
 
-module "s3_bucket" {
-  source       = "./modules/s3"
-  bucket_name  = "my-hackthon-bucket-${var.environment}"  # Ensure the bucket name is globally unique
-  environment  = var.environment
+module "s3" {
+  source      = "./modules/s3"
+  bucket_name = "hackthon-bucket-2024" 
+  aws_region  = "us-east-1"
+  acl         = "private"
+  versioning  = true
+  tags        = {
+    Environment = "Production"
+    Name        = "MyProductionBucket"
+  }
 }
+
 /*
 module "iot" {
   source = "./modules/iot"
