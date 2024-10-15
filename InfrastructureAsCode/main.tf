@@ -15,6 +15,10 @@ provider "aws" {
   secret_key = var.aws_secret_access_key
 }
 
+provider "datadog" {
+  api_key = var.datadog_api_key
+}
+
 module "s3" {
   source      = "./modules/s3"
   bucket_name = "hackthon-bucket-2024" 
@@ -50,4 +54,10 @@ module "iot" {
   attach_existing_certificate   = true  # Set to true to use the existing certificate
   s3_bucket_name               = module.s3.bucket_name
   topic_name                   = "hackthon"
+  datadog_api_key              = var.datadog_api_key  # Pass API key to IoT module
+}
+
+module "datadog" {
+  source      = "./modules/datadog"
+  datadog_api_key = var.datadog_api_key
 }
