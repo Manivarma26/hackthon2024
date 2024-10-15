@@ -9,3 +9,8 @@ variable "attach_existing_certificate" {
   type        = bool
   default     = false
 }
+
+variable "s3_bucket_name" {
+  description = "The name of the existing S3 bucket where IoT data will be sent"
+  type        = string
+}
