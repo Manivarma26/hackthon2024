@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  bucket = "your-unique-bucket-name"
+  bucket = "hackathon2024IOT"
 }
 
 output "bucket_name" {
