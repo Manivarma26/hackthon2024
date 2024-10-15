@@ -1,12 +1,6 @@
 resource "aws_s3_bucket" "hackthon" {
   bucket = var.bucket_name
   acl    = var.acl
-
-  versioning {
-    enabled = var.versioning
-  }
-
-  tags = var.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "hackthon" {
