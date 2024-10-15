@@ -6,7 +6,7 @@ on:
       - main
 defaults:
   run:
-    working-directory: ${{ env.tf_actions_working_dir }}      
+    working-directory: ./InfrastructureAsCode     
 
 jobs:
   deploy:
