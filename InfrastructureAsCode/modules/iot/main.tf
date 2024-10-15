@@ -27,15 +27,13 @@ resource "aws_iot_topic_rule" "iot" {
   name        = "${var.thing_name}-to-s3"
   description = "Send IoT data to S3 bucket"
 
-  sql = "SELECT * FROM 'your/topic'"  # Adjust your SQL statement based on your topic
+  sql = "SELECT * FROM '${var.topic_name}'"  # Adjust your SQL statement based on your topic
 
   rule_disabled = false
 
   aws_s3 {
     bucket_name = var.s3_bucket_name
     key         = "${var.thing_name}/${timestamp()}.json"  # Adjust the key as needed
-
-    // Optional: Configure the IAM role for the IoT Rule
     role_arn = aws_iam_role.iot_s3_role.arn
   }
 }
