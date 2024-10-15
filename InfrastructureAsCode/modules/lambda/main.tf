@@ -1,4 +1,4 @@
-resource "aws_lambda_function" "this" {
+resource "aws_lambda_function" "iot" {
   function_name = "DataProcessor"
   role          = aws_iam_role.lambda_role.arn
   handler       = "lambda_function.lambda_handler"
