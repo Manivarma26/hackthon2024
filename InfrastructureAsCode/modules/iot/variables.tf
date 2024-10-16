@@ -28,3 +28,17 @@ variable "datadog_app_key" {
   description = "APP key for Datadog"
   type        = string
 }
+variable "thing_name" {
+  description = "The name of the IoT thing"
+  type        = string
+}
+
+variable "policy_name" {
+  description = "The name of the IoT policy"
+  type        = string
+}
+
+variable "policy_document" {
+  description = "The JSON document that defines the policy"
+  type        = string
+}
