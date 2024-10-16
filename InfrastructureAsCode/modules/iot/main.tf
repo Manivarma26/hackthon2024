@@ -7,20 +7,18 @@ resource "aws_iot_policy" "iot" {
   policy = var.policy_document
 }
 
-# Use existing certificate ARN if available
 resource "aws_iot_thing_principal_attachment" "iot" {
   count = var.attach_existing_certificate ? 1 : 0
 
-  thing = aws_iot_thing.iot.name
-  principal  = var.existing_certificate_arn
+  thing    = aws_iot_thing.iot.name
+  principal = var.existing_certificate_arn
 }
 
-# Attach policy to the existing certificate
 resource "aws_iot_policy_attachment" "iot" {
   count = var.attach_existing_certificate ? 1 : 0
 
-  policy      = aws_iot_policy.iot.name
-  target      = var.existing_certificate_arn
+  policy = aws_iot_policy.iot.name
+  target = var.existing_certificate_arn
 }
 
 resource "aws_cloudwatch_log_group" "iot_log_group" {
@@ -46,15 +44,33 @@ resource "aws_iam_role" "lambda_execution_role" {
   })
 }
 
+resource "aws_iam_role" "iot_cloudwatch_role" {
+  name = "iot_cloudwatch_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Principal = {
+          Service = "iot.amazonaws.com"
+        },
+        Effect = "Allow",
+        Sid = ""
+      }
+    ]
+  })
+}
+
 resource "aws_lambda_function" "datadog_logger" {
   function_name = "datadog_logger"
 
   handler = "lambda_function.lambda_handler"
   runtime = "python3.8"  # or your preferred runtime
 
-  role = aws_iam_role.lambda_execution_role.arn
-  filename         = "modules/lambda/lambda_function.zip"
-  source_code_hash = filebase64sha256("modules/lambda/lambda_function.zip")  # Adjust path to your zipped function
+  role              = aws_iam_role.lambda_execution_role.arn
+  filename          = "modules/lambda/lambda_function.zip"
+  source_code_hash  = filebase64sha256("modules/lambda/lambda_function.zip")  # Adjust path to your zipped function
 
   environment {
     variables = {
@@ -74,12 +90,12 @@ resource "aws_iot_topic_rule" "iot" {
   aws_s3 {
     bucket_name = var.s3_bucket_name
     key         = "${var.thing_name}/${timestamp()}.json"
-    role_arn    = aws_iam_role.iot_s3_role.arn
+    role_arn    = aws_iam_role.iot_s3_role.arn  # Ensure this role is defined elsewhere
   }
 
   cloudwatch_logs {
     log_group_name = aws_cloudwatch_log_group.iot_log_group.name  # Reference the log group created above
-    role_arn       = aws_iam_role.iot_cloudwatch_role.arn
+    role_arn       = aws_iam_role.iot_cloudwatch_role.arn  # Reference the new CloudWatch role
   }
 
   lambda {
