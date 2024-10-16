@@ -61,6 +61,7 @@ resource "aws_lambda_function" "datadog_logger" {
       DD_API_KEY = var.datadog_api_key
     }
   }
+}
 
 resource "aws_iot_topic_rule" "iot" {
   name        = "${var.thing_name}-to-s3"
