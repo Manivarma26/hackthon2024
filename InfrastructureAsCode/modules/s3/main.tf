@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "hackthon" {
   bucket = var.bucket_name
-  acl    = var.acl
+  # acl    = var.acl
 }
 
 resource "aws_s3_bucket_public_access_block" "hackthon" {
