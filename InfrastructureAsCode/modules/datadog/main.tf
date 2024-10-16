@@ -1,6 +1,7 @@
 resource "datadog_dashboard" "iot_dashboard" {
   title        = "IoT Dashboard"
   description  = "Dashboard for monitoring IoT metrics"
+  layout_type  = "ordered"
 
   widget {
     title = "IoT Data Over Time"
