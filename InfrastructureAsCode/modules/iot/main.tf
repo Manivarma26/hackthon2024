@@ -161,7 +161,7 @@ resource "aws_iam_policy" "iot_s3_policy" {
           "s3:PutObject",
           "s3:PutObjectAcl"
         ]
-        Resource = "${aws_s3_bucket.hackthon.arn}/*"  # Ensure this matches your bucket name
+        Resource = "${var.s3_bucket_arn}/*"  # Ensure this matches your bucket name
       }
     ]
   })
