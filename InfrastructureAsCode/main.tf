@@ -60,9 +60,9 @@ module "iot" {
   datadog_api_key              = var.datadog_api_key  # Pass API key to IoT module
   datadog_app_key              = var.datadog_app_key
   s3_bucket_arn                = module.s3.hackthon_arn
-  certificate_pem              = file("path/to/your/certificate.pem")
-  private_key                  = file("path/to/your/private.key")
-  root_ca                      = file("path/to/your/root-ca.pem") 
+  certificate_pem              = file("modules/certificate/a10c8764f8c557963d27497e685f67c1b8d753f45eabaf8edacf57a97fcbeed0-certificate.pem.crt")
+  private_key                  = file("modules/certificate/a10c8764f8c557963d27497e685f67c1b8d753f45eabaf8edacf57a97fcbeed0-private.pem.key")
+  root_ca                      = file("modules/certificate/AmazonRootCA1.pem") 
 }
 
 module "datadog" {
