@@ -8,13 +8,13 @@ variable "aws_region" {
   type        = string
   default     = "us-east-1"
 }
-
+/*
 variable "acl" {
   description = "The canned ACL to apply to the bucket"
   type        = string
   default     = "private"
 }
-
+*/
 variable "versioning" {
   description = "Enable versioning for the bucket"
   type        = bool
