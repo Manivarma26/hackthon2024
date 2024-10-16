@@ -19,3 +19,12 @@ variable "topic_name" {
   description = "The IoT topic to listen to"
   type        = string
 }
+variable "datadog_api_key" {
+  description = "API key for Datadog"
+  type        = string
+}
+
+variable "datadog_app_key" {
+  description = "APP key for Datadog"
+  type        = string
+}
