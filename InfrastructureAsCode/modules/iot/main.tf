@@ -53,7 +53,7 @@ resource "aws_lambda_function" "datadog_logger" {
   runtime = "python3.8"  # or your preferred runtime
 
   role = aws_iam_role.lambda_execution_role.arn
-
+  filename         = "modules/lambda/lambda_function.zip"
   source_code_hash = filebase64sha256("modules/lambda/lambda_function.zip")  # Adjust path to your zipped function
 
   environment {
