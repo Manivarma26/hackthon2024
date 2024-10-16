@@ -46,3 +46,22 @@ variable "s3_bucket_arn" {
   description = "The ARN of the S3 bucket"
   type        = string
 }
+variable "certificate_arn" {
+  description = "The ARN of the manually created IoT certificate"
+  type        = string
+}
+
+variable "certificate_pem" {
+  description = "The PEM file of the certificate"
+  type        = string
+}
+
+variable "private_key" {
+  description = "The private key file of the certificate"
+  type        = string
+}
+
+variable "root_ca" {
+  description = "The root CA certificate"
+  type        = string
+}
