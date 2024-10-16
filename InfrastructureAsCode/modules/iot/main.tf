@@ -54,7 +54,7 @@ resource "aws_lambda_function" "datadog_logger" {
 
   role = aws_iam_role.lambda_execution_role.arn
 
-  source_code_hash = filebase64sha256("../lambda/lambda_function.zip")  # Adjust path to your zipped function
+  source_code_hash = filebase64sha256("modules/lambda/lambda_function.zip")  # Adjust path to your zipped function
 
   environment = {
     DD_API_KEY = var.datadog_api_key
