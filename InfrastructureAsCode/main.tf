@@ -63,4 +63,5 @@ module "iot" {
 module "datadog" {
   source      = "./modules/datadog"
   datadog_api_key = var.datadog_api_key
+  datadog_app_key = var.datadog_app_key
 }
