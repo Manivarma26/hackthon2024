@@ -58,6 +58,7 @@ module "iot" {
   s3_bucket_name               = module.s3.bucket_name
   topic_name                   = "hackthon"
   datadog_api_key              = var.datadog_api_key  # Pass API key to IoT module
+  datadog_app_key              = var.datadog_app_key
 }
 
 module "datadog" {
