@@ -81,7 +81,7 @@ resource "aws_lambda_function" "datadog_logger" {
 }
 
 resource "aws_iot_topic_rule" "iot" {
-  name        = "${var.thing_name}-to-s3"
+  name        = "${var.thing_name}_to_s3"
   description = "Send IoT data to S3 bucket and CloudWatch"
 
   sql        = "SELECT * FROM '${var.topic_name}'"
