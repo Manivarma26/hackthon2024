@@ -26,7 +26,7 @@ module "s3" {
   source      = "./modules/s3"
   bucket_name = "hackthon-bucket-2024" 
   aws_region  = "us-east-1"
-  acl         = "private"
+  #acl         = "private"
   versioning  = true
   tags        = {
     Environment = "hackthon"
