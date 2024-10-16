@@ -129,3 +129,44 @@ resource "aws_iam_role_policy_attachment" "attach_iot_cloudwatch_policy" {
   role       = aws_iam_role.iot_cloudwatch_role.name
   policy_arn = aws_iam_policy.iot_cloudwatch_policy.arn
 }
+resource "aws_iam_role" "iot_s3_role" {
+  name = "iot_s3_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Principal = {
+          Service = "iot.amazonaws.com"
+        },
+        Effect = "Allow",
+        Sid = ""
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "iot_s3_policy" {
+  name        = "iot_s3_policy"
+  description = "Policy for IoT to access S3 bucket"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:PutObjectAcl"
+        ]
+        Resource = "${aws_s3_bucket.hackthon.arn}/*"  # Ensure this matches your bucket name
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_iot_s3_policy" {
+  role       = aws_iam_role.iot_s3_role.name
+  policy_arn = aws_iam_policy.iot_s3_policy.arn
+}
