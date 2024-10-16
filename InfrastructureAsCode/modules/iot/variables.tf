@@ -42,3 +42,7 @@ variable "policy_document" {
   description = "The JSON document that defines the policy"
   type        = string
 }
+variable "s3_bucket_arn" {
+  description = "The ARN of the S3 bucket"
+  type        = string
+}
