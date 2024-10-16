@@ -21,6 +21,11 @@ resource "aws_iot_policy_attachment" "iot" {
   target = var.existing_certificate_arn
 }
 
+resource "aws_s3_bucket" "hackthon" {
+  bucket = var.bucket_name
+  acl    = var.acl
+}
+
 resource "aws_cloudwatch_log_group" "iot_log_group" {
   name              = "iot-log-group"  # Change to your desired log group name
   retention_in_days = 7  # Optional: Set retention period
