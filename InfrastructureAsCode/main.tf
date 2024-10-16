@@ -53,13 +53,16 @@ module "iot" {
       }
     ]
   })
-  existing_certificate_arn     = "arn:aws:iot:region:account-id:cert/your-certificate-id"  # Replace with your existing certificate ARN
+  existing_certificate_arn     = "arn:aws:iot:us-east-1:742945646871:cert/a10c8764f8c557963d27497e685f67c1b8d753f45eabaf8edacf57a97fcbeed0"  # Replace with your existing certificate ARN
   attach_existing_certificate  = true  # Set to true to use the existing certificate
   s3_bucket_name               = module.s3.bucket_name
   topic_name                   = "hackthon"
   datadog_api_key              = var.datadog_api_key  # Pass API key to IoT module
   datadog_app_key              = var.datadog_app_key
   s3_bucket_arn                = module.s3.hackthon_arn
+  certificate_pem              = file("path/to/your/certificate.pem")
+  private_key                  = file("path/to/your/private.key")
+  root_ca                      = file("path/to/your/root-ca.pem") 
 }
 
 module "datadog" {
