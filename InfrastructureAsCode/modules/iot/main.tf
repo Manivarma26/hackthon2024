@@ -84,23 +84,27 @@ resource "aws_iot_topic_rule" "iot" {
   description = "Send IoT data to S3 bucket and CloudWatch"
 
   sql = "SELECT * FROM '${var.topic_name}'"
+  sql_version = "2016-03-23"
 
-  rule_disabled = false
-
-  aws_s3 {
-    bucket_name = var.s3_bucket_name
-    key         = "${var.thing_name}/${timestamp()}.json"
-    role_arn    = aws_iam_role.iot_s3_role.arn  # Ensure this role is defined elsewhere
+  action {
+    s3 {
+      bucket_name = var.s3_bucket_name
+      key         = "${var.thing_name}/${timestamp()}.json"
+      role_arn    = aws_iam_role.iot_s3_role.arn  # Ensure this role is defined elsewhere
+    }
   }
 
-  cloudwatch_logs {
-    log_group_name = aws_cloudwatch_log_group.iot_log_group.name  # Reference the log group created above
-    role_arn       = aws_iam_role.iot_cloudwatch_role.arn  # Reference the new CloudWatch role
+  action {
+    cloudwatch_logs {
+      log_group_name = aws_cloudwatch_log_group.iot_log_group.name
+      role_arn       = aws_iam_role.iot_cloudwatch_role.arn
+    }
   }
 
-  lambda {
-    function_arn = aws_lambda_function.datadog_logger.arn
-  }
+  action {
+    lambda {
+      function_arn = aws_lambda_function.datadog_logger.arn
+    }
   enabled = true
 }
 
