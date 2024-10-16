@@ -8,5 +8,5 @@ output "bucket_arn" {
   value       = aws_s3_bucket.hackthon.arn
 }
 output "bucket_name" {
-  value = aws_s3_bucket.your_bucket_name.id
+  value = aws_s3_bucket.hackthon.id
 }
