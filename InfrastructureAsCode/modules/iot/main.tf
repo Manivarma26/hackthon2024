@@ -105,6 +105,7 @@ resource "aws_iot_topic_rule" "iot" {
     lambda {
       function_arn = aws_lambda_function.datadog_logger.arn
     }
+  }
   enabled = true
 }
 
