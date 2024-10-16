@@ -4,11 +4,11 @@ resource "datadog_dashboard" "iot_dashboard" {
   layout_type  = "free"
 
   widget {
-    title = "IoT Data Over Time"
-    timeseries {
-      requests {
-        query = "avg:aws.iot.messages {*}"
-      }
+    alert_graph_definition {
+      alert_id  = "895605"
+      viz_type  = "timeseries"
+      title     = "Widget Title"
+      live_span = "1h"
     }
   }
 
