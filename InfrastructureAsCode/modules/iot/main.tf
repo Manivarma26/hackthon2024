@@ -19,7 +19,7 @@ resource "aws_iot_thing_principal_attachment" "iot" {
 resource "aws_iot_policy_attachment" "iot" {
   count = var.attach_existing_certificate ? 1 : 0
 
-  policy_name = aws_iot_policy.iot.name
+  policy      = aws_iot_policy.iot.name
   target      = var.existing_certificate_arn
 }
 
